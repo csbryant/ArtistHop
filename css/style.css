@@ -1,0 +1,44 @@
+body {
+    background-color: #333333 !important;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+header {
+    margin-top: 20px;
+    color: whitesmoke;
+    text-align: center;
+    font-size: 40px;
+}
+
+h3 {
+    color: whitesmoke;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+button {
+    color: gray;
+    background-color: whitesmoke;
+    padding: 10px;
+    border-radius: 10px !important;
+}
+
+#searchInput {
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.artists {
+    width: 840px;
+    margin: auto;
+}
+
+img {
+    margin: 10px;
+}
+
+@media (max-width: 830px) {
+    .artists {
+        width: 420px;
+        margin: auto;
+    }
+ }
