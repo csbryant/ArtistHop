@@ -3,11 +3,36 @@ $(document).ready(function () {
   var searchBtn = $("#button-addon2");
   var imgDiv = $("#image");
 
-  var queryURL =
-    "http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=";
+  var lastFMURL =
+    "http://ws.audioscrobbler.com/2.0/?method="
+
+  var getsimilarArtist = "artist.getsimilar&artist="
+
+  var gettopArtists = "chart.getTopArtists"
 
   var apiKey = "&api_key=6c1bc3108e57d5a4c6eca326981bfaa6&limit=10&format=json";
 
+  var topArtistsdiv = $("#top-artist")
+
+
+  //Get top Artist
+  
+  $.ajax({
+    url: lastFMURL + gettopArtists + apiKey,
+    method: "GET",
+  }).then(function (response) {
+    console.log(response);
+
+    var topArtists = response.artists.artist;
+
+    for (var i = 0; i < topArtists.length; i++) {
+      console.log(topArtists[i].name);
+      topArtistsdiv.text(topArtists[i].name)
+    }
+   })    
+
+
+//Get Similar Artist
   searchBtn.click(function (event) {
     event.preventDefault();
 
@@ -15,7 +40,7 @@ $(document).ready(function () {
     console.log(q);
 
     $.ajax({
-      url: queryURL + q + apiKey,
+      url: lastFMURL +  getsimilarArtist + q + apiKey,
       method: "GET",
     }).then(function (response) {
       // Test to see what I'm retrieving from Last.fm
@@ -30,6 +55,8 @@ $(document).ready(function () {
       //     imgDiv.append(image);
       //   }
     });
+
+//Get Artist Picutes
     $.ajax({
       url: "https://www.theaudiodb.com/api/v1/json/1/search.php?s=" + q,
       method: "GET",
