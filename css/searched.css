@@ -58,29 +58,39 @@ h5 {
   margin: 50px 200px;
 }
 
-.artist-picture {
-  background: url(../images/iggy_pop.jpg);
-  width: 100%;
-  background-size: cover;
-  background-position: top;
-  border-radius: 50%;
-  background-repeat: no-repeat;
+.artist-info {
+    background: url(../images/iggy_pop.jpg);
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    background-position: top;
+    border-radius: 50%;
+    background-repeat: no-repeat;
 }
 
-.artist-picture:after {
-  content: "";
-  padding-bottom: 100%;
-  display: block;
+.artist-name {
+    padding: 10px 0px 40px 0px;
 }
 
-.picture-padding {
-  padding: 40px;
+@media only screen and (max-width: 600px) {
+.div-picture {
+    background: url(../images/iggy_pop.jpg);
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-position: top;
+    border-radius: 50%;
+    background-repeat: no-repeat;
 }
 
-/* media query */
+@media only screen and (max-width: 500px) {
+    .div-picture {
+        background: url(../images/iggy_pop.jpg);
+        width: 100px;
+        height: 100px;
+        background-size: cover;
+        background-position: top;
+        border-radius: 50%;
+        background-repeat: no-repeat;
+    }
 
-@media only screen and (max-width: 1000px) {
-    .picture-padding {
-        padding: 0px;
-      }
-  }
