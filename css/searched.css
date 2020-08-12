@@ -72,8 +72,8 @@ h5 {
     padding: 10px 0px 40px 0px;
 }
 
-@media only screen and (max-width: 600px) {
-.div-picture {
+@media (max-width: 600px) {
+.artist-info {
     background: url(../images/iggy_pop.jpg);
     width: 100px;
     height: 100px;
@@ -82,15 +82,4 @@ h5 {
     border-radius: 50%;
     background-repeat: no-repeat;
 }
-
-@media only screen and (max-width: 500px) {
-    .div-picture {
-        background: url(../images/iggy_pop.jpg);
-        width: 100px;
-        height: 100px;
-        background-size: cover;
-        background-position: top;
-        border-radius: 50%;
-        background-repeat: no-repeat;
-    }
 
