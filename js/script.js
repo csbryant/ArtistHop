@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  // Variables to grab elements on the homepage
   var searchInput = $("#searchInput");
   var searchBtn = $("#button-addon2");
   var imgDiv1 = $("#image1");
@@ -9,7 +10,7 @@ $(document).ready(function () {
   var imgDiv6 = $("#image6");
   var imgDiv7 = $("#image7");
   var imgDiv8 = $("#image8");
-
+  // Creating image tags for artist recommendations
   var createImg1 = $("<img>");
   var createImg2 = $("<img>");
   var createImg3 = $("<img>");
@@ -18,7 +19,7 @@ $(document).ready(function () {
   var createImg6 = $("<img>");
   var createImg7 = $("<img>");
   var createImg8 = $("<img>");
-
+  // Names of above artists
   var createP1 = $("<p>");
   var createP2 = $("<p>");
   var createP3 = $("<p>");
@@ -27,28 +28,39 @@ $(document).ready(function () {
   var createP6 = $("<p>");
   var createP7 = $("<p>");
   var createP8 = $("<p>");
-
+  // API Variables
   var lastFMURL = "http://ws.audioscrobbler.com/2.0/?method=";
 
-  var getsimilarArtist = "artist.getsimilar&artist=";
+  var getSimilarArtists = "artist.getsimilar&artist=";
 
-  var gettopArtists = "chart.getTopArtists";
+  var getTopArtists = "chart.getTopArtists";
+
+  var getArtistInfo = "artist.getinfo&artist="
 
   var apiKey = "&api_key=6c1bc3108e57d5a4c6eca326981bfaa6&limit=8&format=json";
 
-  var topArtistsdiv = $("#top-artist");
-
-  var url = lastFMURL + gettopArtists + apiKey;
+  var url = lastFMURL + getTopArtists + apiKey;
   var url2 = "https://www.theaudiodb.com/api/v1/json/1/search.php?s=";
-
+  // Event listener for search bar
   searchBtn.click(function (event) {
     event.preventDefault();
+    getSim();
+  });
 
+  // Function for search bar
+  function getSim() {
     var q = searchInput.val().trim();
     console.log(q);
-  });
+    $.ajax({
+      url: lastFMURL + getSimilarArtists + q + apiKey,
+      method: "GET",
+    }).then(function (artists) {
+      console.log(artists);
+    });
+  }
+  
+  // Ajax requests to populate artist recommendations
   $.ajax({ url: url, method: "GET" }).then(function (response) {
-    
     $.ajax({
       url: url2 + encodeURIComponent(response.artists.artist[0].name),
       method: "GET",
@@ -61,7 +73,6 @@ $(document).ready(function () {
     });
   });
   $.ajax({ url: url, method: "GET" }).then(function (response) {
-    
     $.ajax({
       url: url2 + encodeURIComponent(response.artists.artist[1].name),
       method: "GET",
@@ -72,8 +83,8 @@ $(document).ready(function () {
       imgDiv2.append(createP2);
     });
   });
+
   $.ajax({ url: url, method: "GET" }).then(function (response) {
-    
     $.ajax({
       url: url2 + encodeURIComponent(response.artists.artist[2].name),
       method: "GET",
@@ -84,8 +95,8 @@ $(document).ready(function () {
       imgDiv3.append(createP3);
     });
   });
+
   $.ajax({ url: url, method: "GET" }).then(function (response) {
-    
     $.ajax({
       url: url2 + encodeURIComponent(response.artists.artist[3].name),
       method: "GET",
@@ -96,8 +107,8 @@ $(document).ready(function () {
       imgDiv4.append(createP4);
     });
   });
+
   $.ajax({ url: url, method: "GET" }).then(function (response) {
-    
     $.ajax({
       url: url2 + encodeURIComponent(response.artists.artist[4].name),
       method: "GET",
@@ -107,41 +118,42 @@ $(document).ready(function () {
       createP5.text(response.artists.artist[4].name);
       imgDiv5.append(createP5);
     });
-    $.ajax({ url: url, method: "GET" }).then(function (response) {
-      
-      $.ajax({
-        url: url2 + encodeURIComponent(response.artists.artist[5].name),
-        method: "GET",
-      }).then(function (data) {
-        createImg6.attr("src", data.artists[0].strArtistThumb);
-        imgDiv6.append(createImg6);
-        createP6.text(response.artists.artist[5].name);
-        imgDiv6.append(createP6);
-      });
-    });
-    $.ajax({ url: url, method: "GET" }).then(function (response) {
-      
-      $.ajax({
-        url: url2 + encodeURIComponent(response.artists.artist[6].name),
-        method: "GET",
-      }).then(function (data) {
-        createImg7.attr("src", data.artists[0].strArtistThumb);
-        imgDiv7.append(createImg7);
-        createP7.text(response.artists.artist[6].name);
-        imgDiv7.append(createP7);
-      });
-    });
-    $.ajax({ url: url, method: "GET" }).then(function (response) {
-      
-      $.ajax({
-        url: url2 + encodeURIComponent(response.artists.artist[7].name),
-        method: "GET",
-      }).then(function (data) {
-        createImg8.attr("src", data.artists[0].strArtistThumb);
-        imgDiv8.append(createImg8);
-        createP8.text(response.artists.artist[7].name);
-        imgDiv8.append(createP8);
-      });
+  });
+  $.ajax({ url: url, method: "GET" }).then(function (response) {
+    $.ajax({
+      url: url2 + encodeURIComponent(response.artists.artist[5].name),
+      method: "GET",
+    }).then(function (data) {
+      createImg6.attr("src", data.artists[0].strArtistThumb);
+      imgDiv6.append(createImg6);
+      createP6.text(response.artists.artist[5].name);
+      imgDiv6.append(createP6);
     });
   });
+
+  $.ajax({ url: url, method: "GET" }).then(function (response) {
+    $.ajax({
+      url: url2 + encodeURIComponent(response.artists.artist[6].name),
+      method: "GET",
+    }).then(function (data) {
+      createImg7.attr("src", data.artists[0].strArtistThumb);
+      imgDiv7.append(createImg7);
+      createP7.text(response.artists.artist[6].name);
+      imgDiv7.append(createP7);
+    });
+  });
+
+  $.ajax({ url: url, method: "GET" }).then(function (response) {
+    $.ajax({
+      url: url2 + encodeURIComponent(response.artists.artist[7].name),
+      method: "GET",
+    }).then(function (data) {
+      createImg8.attr("src", data.artists[0].strArtistThumb);
+      imgDiv8.append(createImg8);
+      createP8.text(response.artists.artist[7].name);
+      imgDiv8.append(createP8);
+    });
+  });
+
+  
 });
