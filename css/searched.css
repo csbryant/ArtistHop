@@ -1,5 +1,4 @@
-/* general Styling */
-
+/* general */
 * {
   box-sizing: border-box;
 }
@@ -27,7 +26,17 @@ h5 {
   color: white;
 }
 
-/* header styling */
+/* navbar */
+.top-bar-right {
+  width: 40%;
+}
+
+
+.search-input {
+  border-radius: 30px;
+}
+
+/* header */
 #searched-artist {
   height: 60vh;
   background: linear-gradient(
@@ -68,10 +77,15 @@ h5 {
     background-repeat: no-repeat;
 }
 
+.artist-info:hover {
+    background: black;
+}
+
 .artist-name {
     padding: 10px 0px 40px 0px;
 }
 
+/* media queries */
 @media (max-width: 600px) {
 .artist-info {
     background: url(../images/iggy_pop.jpg);
@@ -82,4 +96,3 @@ h5 {
     border-radius: 50%;
     background-repeat: no-repeat;
 }
-
