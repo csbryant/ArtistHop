@@ -18,11 +18,37 @@
     <link rel="stylesheet" href="./css/searched.css" />
   </head>
   <body>
+
+    <!-- NAVIGATION -->
+    <div class="title-bar" data-responsive-toggle="responsive-menu" data-hide-for="medium">
+      <button class="menu-icon" type="button" data-toggle="responsive-menu"></button>
+      <div class="title-bar-title">Menu</div>
+    </div>
+    
+    <div class="top-bar" id="responsive-menu">
+      <div class="top-bar-left">
+        <ul class="dropdown menu" data-dropdown-menu>
+          <li class="menu-text">Jukebox 2.0</li>
+          <li><a src="../GroupProject1/index.html">Home</a></li>
+        </ul>
+      </div>
+      <div class="top-bar-right">
+        <ul class="menu align-right">
+          <li style="width: 80%;"><input type="search" placeholder="Search" class="search-input"></li>
+          <li style="width: 20%;"><button type="button" class="button">Search</button></li>
+        </ul>
+      </div>
+    </div>
+
+
+    <!-- HEADER -->
     <header class="grid-x align-bottom" id="searched-artist">
       <div class="cell medium-6 small-12" id="artist-name">
         Iggy Pop
       </div>
     </header>
+
+    <!-- SIMILAR ARTIST GRID -->
 
     <div class="grid-x" id="similar-artists">
 
@@ -30,7 +56,6 @@
         <h2>Similar Artists</h2>
       </div>
 
-
       <div class="cell large-4 medium-12 align-center">
         <div class="grid-y">
           <div class="cell">
@@ -77,7 +102,7 @@
               <div class="artist-info"></div>
             </div>
           </div>
-          <div class="cell text-center artist-name">
+          <div class="cell text-center artist-name" data-name="Iggy Pop">
             <h5>Iggy Pop</h5>
           </div>
         </div>
@@ -108,6 +133,8 @@
           </div>
         </div>
       </div>
+
+    </div>
 
 
      
@@ -122,5 +149,6 @@
     <script src="js/vendor/what-input.js"></script>
     <script src="js/vendor/foundation.js"></script>
     <script src="js/app.js"></script>
+    <script src="../GroupProject1/js/searched.js"></script>
   </body>
 </html>
