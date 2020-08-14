@@ -48,9 +48,9 @@ $(document).ready(function () {
   // Event listener for search bar
   searchBtn.click(function (event) {
     event.preventDefault();
-    location.href = "./artist.html"
-    getSim();
     artistInfo();
+    getSim();
+    
   });
 
   // Function for search bar
@@ -63,6 +63,7 @@ $(document).ready(function () {
     }).then(function (artists) {
       console.log(artists.similarartists.artist)
       localStorage.setItem("similarArtists", JSON.stringify(artists.similarartists.artist));
+      location.href = "searched.html"
     });
   }
   // Function to get artist info
@@ -72,107 +73,108 @@ $(document).ready(function () {
       url: lastFMURL + getArtistInfo + q + apiKey,
       method: "GET",
     }).then(function (artists) {
-      localStorage.setItem("artistName", artists.artist.name)
-      localStorage.setItem("artistInfo", artists.artist.bio.summary);
+      console.log(artists)
+      localStorage.setItem("artistName", JSON.stringify(artists.artist.name));
+      localStorage.setItem("artistInfo", JSON.stringify(artists.artist.bio.summary));
     });
   }
   
   
-  // Ajax requests to populate artist recommendations
-  $.ajax({ url: url, method: "GET" }).then(function (response) {
-    $.ajax({
-      url: url2 + encodeURIComponent(response.artists.artist[0].name),
-      method: "GET",
-    }).then(function (data) {
-      createImg1.attr("src", data.artists[0].strArtistThumb);
-      imgDiv1.append(createImg1);
-      createP1.text(response.artists.artist[0].name);
-      imgDiv1.append(createP1);
-      // imgDiv1.attr("href", )
-    });
-  });
-  $.ajax({ url: url, method: "GET" }).then(function (response) {
-    $.ajax({
-      url: url2 + encodeURIComponent(response.artists.artist[1].name),
-      method: "GET",
-    }).then(function (data) {
-      createImg2.attr("src", data.artists[0].strArtistThumb);
-      imgDiv2.append(createImg2);
-      createP2.text(response.artists.artist[1].name);
-      imgDiv2.append(createP2);
-    });
-  });
+  // // Ajax requests to populate artist recommendations
+  // $.ajax({ url: url, method: "GET" }).then(function (response) {
+  //   $.ajax({
+  //     url: url2 + encodeURIComponent(response.artists.artist[0].name),
+  //     method: "GET",
+  //   }).then(function (data) {
+  //     createImg1.attr("src", data.artists[0].strArtistThumb);
+  //     imgDiv1.append(createImg1);
+  //     createP1.text(response.artists.artist[0].name);
+  //     imgDiv1.append(createP1);
+  //     // imgDiv1.attr("href", )
+  //   });
+  // });
+  // $.ajax({ url: url, method: "GET" }).then(function (response) {
+  //   $.ajax({
+  //     url: url2 + encodeURIComponent(response.artists.artist[1].name),
+  //     method: "GET",
+  //   }).then(function (data) {
+  //     createImg2.attr("src", data.artists[0].strArtistThumb);
+  //     imgDiv2.append(createImg2);
+  //     createP2.text(response.artists.artist[1].name);
+  //     imgDiv2.append(createP2);
+  //   });
+  // });
 
-  $.ajax({ url: url, method: "GET" }).then(function (response) {
-    $.ajax({
-      url: url2 + encodeURIComponent(response.artists.artist[2].name),
-      method: "GET",
-    }).then(function (data) {
-      createImg3.attr("src", data.artists[0].strArtistThumb);
-      imgDiv3.append(createImg3);
-      createP3.text(response.artists.artist[2].name);
-      imgDiv3.append(createP3);
-    });
-  });
+  // $.ajax({ url: url, method: "GET" }).then(function (response) {
+  //   $.ajax({
+  //     url: url2 + encodeURIComponent(response.artists.artist[2].name),
+  //     method: "GET",
+  //   }).then(function (data) {
+  //     createImg3.attr("src", data.artists[0].strArtistThumb);
+  //     imgDiv3.append(createImg3);
+  //     createP3.text(response.artists.artist[2].name);
+  //     imgDiv3.append(createP3);
+  //   });
+  // });
 
-  $.ajax({ url: url, method: "GET" }).then(function (response) {
-    $.ajax({
-      url: url2 + encodeURIComponent(response.artists.artist[3].name),
-      method: "GET",
-    }).then(function (data) {
-      createImg4.attr("src", data.artists[0].strArtistThumb);
-      imgDiv4.append(createImg4);
-      createP4.text(response.artists.artist[3].name);
-      imgDiv4.append(createP4);
-    });
-  });
+  // $.ajax({ url: url, method: "GET" }).then(function (response) {
+  //   $.ajax({
+  //     url: url2 + encodeURIComponent(response.artists.artist[3].name),
+  //     method: "GET",
+  //   }).then(function (data) {
+  //     createImg4.attr("src", data.artists[0].strArtistThumb);
+  //     imgDiv4.append(createImg4);
+  //     createP4.text(response.artists.artist[3].name);
+  //     imgDiv4.append(createP4);
+  //   });
+  // });
 
-  $.ajax({ url: url, method: "GET" }).then(function (response) {
-    $.ajax({
-      url: url2 + encodeURIComponent(response.artists.artist[4].name),
-      method: "GET",
-    }).then(function (data) {
-      createImg5.attr("src", data.artists[0].strArtistThumb);
-      imgDiv5.append(createImg5);
-      createP5.text(response.artists.artist[4].name);
-      imgDiv5.append(createP5);
-    });
-  });
-  $.ajax({ url: url, method: "GET" }).then(function (response) {
-    $.ajax({
-      url: url2 + encodeURIComponent(response.artists.artist[5].name),
-      method: "GET",
-    }).then(function (data) {
-      createImg6.attr("src", data.artists[0].strArtistThumb);
-      imgDiv6.append(createImg6);
-      createP6.text(response.artists.artist[5].name);
-      imgDiv6.append(createP6);
-    });
-  });
+  // $.ajax({ url: url, method: "GET" }).then(function (response) {
+  //   $.ajax({
+  //     url: url2 + encodeURIComponent(response.artists.artist[4].name),
+  //     method: "GET",
+  //   }).then(function (data) {
+  //     createImg5.attr("src", data.artists[0].strArtistThumb);
+  //     imgDiv5.append(createImg5);
+  //     createP5.text(response.artists.artist[4].name);
+  //     imgDiv5.append(createP5);
+  //   });
+  // });
+  // $.ajax({ url: url, method: "GET" }).then(function (response) {
+  //   $.ajax({
+  //     url: url2 + encodeURIComponent(response.artists.artist[5].name),
+  //     method: "GET",
+  //   }).then(function (data) {
+  //     createImg6.attr("src", data.artists[0].strArtistThumb);
+  //     imgDiv6.append(createImg6);
+  //     createP6.text(response.artists.artist[5].name);
+  //     imgDiv6.append(createP6);
+  //   });
+  // });
 
-  $.ajax({ url: url, method: "GET" }).then(function (response) {
-    $.ajax({
-      url: url2 + encodeURIComponent(response.artists.artist[6].name),
-      method: "GET",
-    }).then(function (data) {
-      createImg7.attr("src", data.artists[0].strArtistThumb);
-      imgDiv7.append(createImg7);
-      createP7.text(response.artists.artist[6].name);
-      imgDiv7.append(createP7);
-    });
-  });
+  // $.ajax({ url: url, method: "GET" }).then(function (response) {
+  //   $.ajax({
+  //     url: url2 + encodeURIComponent(response.artists.artist[6].name),
+  //     method: "GET",
+  //   }).then(function (data) {
+  //     createImg7.attr("src", data.artists[0].strArtistThumb);
+  //     imgDiv7.append(createImg7);
+  //     createP7.text(response.artists.artist[6].name);
+  //     imgDiv7.append(createP7);
+  //   });
+  // });
 
-  $.ajax({ url: url, method: "GET" }).then(function (response) {
-    $.ajax({
-      url: url2 + encodeURIComponent(response.artists.artist[7].name),
-      method: "GET",
-    }).then(function (data) {
-      createImg8.attr("src", data.artists[0].strArtistThumb);
-      imgDiv8.append(createImg8);
-      createP8.text(response.artists.artist[7].name);
-      imgDiv8.append(createP8);
-    });
-  });
+  // $.ajax({ url: url, method: "GET" }).then(function (response) {
+  //   $.ajax({
+  //     url: url2 + encodeURIComponent(response.artists.artist[7].name),
+  //     method: "GET",
+  //   }).then(function (data) {
+  //     createImg8.attr("src", data.artists[0].strArtistThumb);
+  //     imgDiv8.append(createImg8);
+  //     createP8.text(response.artists.artist[7].name);
+  //     imgDiv8.append(createP8);
+  //   });
+  // });
 
   
 });

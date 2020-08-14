@@ -5,17 +5,18 @@ $(document).ready(function () {
 
   if (localStorage.getItem("artistName") === null) {
     console.log("Local storage is null");
-  } else var retName = localStorage.getItem("artistName");
-  var retInfo = localStorage.getItem("artistInfo");
+  } else var retName = JSON.parse(localStorage.getItem("artistName"));
+  var retInfo = JSON.parse(localStorage.getItem("artistInfo"));
   var retArtists = JSON.parse(localStorage.getItem("similarArtists"));
-  $("#newArtistInfo").text(retInfo);
+  $("#artist-name").text(retName);
+  console.log(retName)
   console.log(retArtists);
   
 //   similarArtists.push(retArtists[0].name);
   for (var i = 0; i < retArtists.length; i++) {
       similarArtists.push(retArtists[i].name);
   }
-  similarArtists.forEach(getImages)
+  similarArtists.forEach(getImages);
 
 
   //Ajax called to get get top artist Images
