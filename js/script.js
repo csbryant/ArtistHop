@@ -3,7 +3,7 @@ var searchInput = $("#searchInput");
 var searchBtn = $("#button-addon2");
 
 // API URL Variables
-var lastFMURL = "http://ws.audioscrobbler.com/2.0/?method=";
+var lastFMURL = "https://ws.audioscrobbler.com/2.0/?method=";
 
 var getSimilarArtists = "artist.getsimilar&artist=";
 
