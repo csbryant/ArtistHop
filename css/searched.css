@@ -7,6 +7,7 @@ body {
   background: rgb(26, 26, 26);
 }
 
+p,
 h1,
 h2,
 h3,
@@ -14,6 +15,11 @@ h4,
 h5,
 h6 {
   font-family: "Raleway", sans-serif;
+}
+
+p {
+  font-size: 16px;
+  color: white;
 }
 
 h2 {
@@ -24,6 +30,11 @@ h2 {
 h5 {
   font-size: 20px;
   color: white;
+}
+
+.grid-container {
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
 /* navbar */
@@ -53,7 +64,6 @@ h5 {
 #artist-name {
   font-family: "Recursive", sans-serif;
   font-size: 36px;
-  margin-left: 150px;
   padding-bottom: 20px;
   color: white;
 }
@@ -70,13 +80,15 @@ h5 {
 
 .artist-info {
     background: url(../images/iggy_pop.jpg);
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     background-size: cover;
     background-position: top;
     border-radius: 50%;
     background-repeat: no-repeat;
 }
+
+
 
 .artist-info:hover {
     background: black;
@@ -86,12 +98,16 @@ h5 {
     padding: 10px 0px 40px 0px;
 }
 
+.rock {
+  border: solid red 2px;
+}
+
 /* media queries */
 @media (max-width: 600px) {
 .artist-info {
     background: url(../images/iggy_pop.jpg);
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 130px;
     background-size: cover;
     background-position: top;
     border-radius: 50%;
