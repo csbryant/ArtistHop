@@ -41,10 +41,16 @@ $(document).ready(function () {
 
   var url = lastFMURL + getTopArtists + apiKey;
   var url2 = "https://www.theaudiodb.com/api/v1/json/1/search.php?s=";
+
+// Global variable for search field
+ 
+
   // Event listener for search bar
   searchBtn.click(function (event) {
     event.preventDefault();
+    location.href = "./artist.html"
     getSim();
+    artistInfo();
   });
 
   // Function for search bar
@@ -55,9 +61,22 @@ $(document).ready(function () {
       url: lastFMURL + getSimilarArtists + q + apiKey,
       method: "GET",
     }).then(function (artists) {
-      console.log(artists);
+      console.log(artists.similarartists.artist)
+      localStorage.setItem("similarArtists", JSON.stringify(artists.similarartists.artist));
     });
   }
+  // Function to get artist info
+  function artistInfo() {
+    var q = searchInput.val().trim();
+    $.ajax({
+      url: lastFMURL + getArtistInfo + q + apiKey,
+      method: "GET",
+    }).then(function (artists) {
+      localStorage.setItem("artistName", artists.artist.name)
+      localStorage.setItem("artistInfo", artists.artist.bio.summary);
+    });
+  }
+  
   
   // Ajax requests to populate artist recommendations
   $.ajax({ url: url, method: "GET" }).then(function (response) {
