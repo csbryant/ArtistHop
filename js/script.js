@@ -1,6 +1,8 @@
-// Variables to grab elements on the homepage
-var searchInput = $("#searchInput");
-var searchBtn = $("#button-addon2");
+<
+$(document).ready(function () {
+  // Variables to grab elements on the homepage
+  var searchInput = $("#searchInput");
+  var searchBtn = $("#button-addon2");
 
 // API URL Variables
 var lastFMURL = "https://ws.audioscrobbler.com/2.0/?method=";
@@ -23,38 +25,11 @@ var topArtists = [];
 // Event listener for search bar
 searchBtn.click(function (event) {
   event.preventDefault();
-  location.href = "./artist.html";
+  
   getSim();
   artistInfo();
 });
 
-// Function for search bar
-function getSim() {
-  var q = searchInput.val().trim();
-  console.log(q);
-  $.ajax({
-    url: lastFMURL + getSimilarArtists + q + apiKey,
-    method: "GET",
-  }).then(function (artists) {
-    console.log(artists.similarartists.artist);
-    localStorage.setItem(
-      "similarArtists",
-      JSON.stringify(artists.similarartists.artist)
-    );
-  });
-}
-
-// Function to get artist info
-function artistInfo() {
-  var q = searchInput.val().trim();
-  $.ajax({
-    url: lastFMURL + getArtistInfo + q + apiKey,
-    method: "GET",
-  }).then(function (artists) {
-    localStorage.setItem("artistName", artists.artist.name);
-    localStorage.setItem("artistInfo", artists.artist.bio.summary);
-  });
-}
 
 //Ajax called to get Top Artist
 $.ajax({
@@ -85,3 +60,31 @@ function getImages(parameter) {
     $("#image" + index).append($("<p>").text(parameter));
   });
 }
+  
+  // Function for search bar
+  function getSim() {
+    var q = searchInput.val().trim();
+    console.log(q);
+    $.ajax({
+      url: lastFMURL + getSimilarArtists + q + apiKey,
+      method: "GET",
+    }).then(function (artists) {
+      console.log(artists.similarartists.artist)
+      localStorage.setItem("similarArtists", JSON.stringify(artists.similarartists.artist));
+      location.href = "searched.html"
+    });
+  }
+  // Function to get artist info
+  function artistInfo() {
+    var q = searchInput.val().trim();
+    $.ajax({
+      url: lastFMURL + getArtistInfo + q + apiKey,
+      method: "GET",
+    }).then(function (artists) {
+      console.log(artists)
+      localStorage.setItem("artistName", JSON.stringify(artists.artist.name));
+      localStorage.setItem("artistInfo", JSON.stringify(artists.artist.bio.summary));
+    });
+  }  
+});
+
