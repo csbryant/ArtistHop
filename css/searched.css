@@ -1,0 +1,99 @@
+/* general */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: rgb(26, 26, 26);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Raleway", sans-serif;
+}
+
+h2 {
+  font-size: 26px;
+  color: white;
+}
+
+h5 {
+  font-size: 20px;
+  color: white;
+}
+
+/* navbar */
+.top-bar-right {
+  width: 40%;
+}
+
+
+.search-input {
+  border-radius: 30px;
+  width: 100%;
+}
+
+/* header */
+#searched-artist {
+  height: 60vh;
+  background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0) 59%,
+      rgba(0, 0, 0, 0.65) 100%
+    ),
+    url(../images/iggy_pop.jpg);
+  background-position: center center;
+}
+
+#artist-name {
+  font-family: "Recursive", sans-serif;
+  font-size: 36px;
+  margin-left: 150px;
+  padding-bottom: 20px;
+  color: white;
+}
+
+/* similar artist section */
+.section-title {
+  margin: 30px 0px 50px 0px;
+}
+
+/* card */
+#similar-artists {
+  margin: 50px 200px;
+}
+
+.artist-info {
+    background: url(../images/iggy_pop.jpg);
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    background-position: top;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+}
+
+.artist-info:hover {
+    background: black;
+}
+
+.artist-name {
+    padding: 10px 0px 40px 0px;
+}
+
+/* media queries */
+@media (max-width: 600px) {
+.artist-info {
+    background: url(../images/iggy_pop.jpg);
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-position: top;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+}
