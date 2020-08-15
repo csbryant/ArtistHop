@@ -8,30 +8,33 @@ $(document).ready(function () {
   } else var retName = JSON.parse(localStorage.getItem("artistName"));
   var retInfo = JSON.parse(localStorage.getItem("artistInfo"));
   var retArtists = JSON.parse(localStorage.getItem("similarArtists"));
+  var retBanner = JSON.parse(localStorage.getItem("artistBanner"));
   $("#artist-name").text(retName);
-  console.log(retName)
-  console.log(retArtists);
-  
-//   similarArtists.push(retArtists[0].name);
+  $("#bio").text(retInfo);
+  // console.log(retArtists);
+  $("#searched-artist").css("background-image", "url(" + retBanner + ")");
+
   for (var i = 0; i < retArtists.length; i++) {
-      similarArtists.push(retArtists[i].name);
+    similarArtists.push(retArtists[i].name);
   }
   similarArtists.forEach(getImages);
 
-
-  //Ajax called to get get top artist Images
+  // Ajax called to get get top artist Images
   function getImages(parameter) {
-    // console.log("--->", parameter);
+    console.log("--->", parameter);
     $.ajax({
       url: url2 + encodeURIComponent(parameter),
       method: "GET",
     }).then(function (data) {
-    //   console.log(data);
+      console.log(data);
       var index = similarArtists.indexOf(parameter);
-      $("#image" + index).append(
-        $("<img>").attr("src", data.artists[0].strArtistThumb)
+      console.log(data.artists[0].strArtistThumb);
+
+      $("#artist" + index).css(
+        "background-image",
+        "url(" + data.artists[0].strArtistThumb + ")"
       );
-      $("#image" + index).append($("<p>").text(parameter));
+      $("#name" + index).text(parameter);
     });
   }
 });
