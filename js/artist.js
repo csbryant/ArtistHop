@@ -27,8 +27,8 @@ $(document).ready(function () {
     var q = searchInput.val().trim();
     artistInfo(q);
     getSim(q);
-    tasteTube(q);
     artistBanner(q);
+    tasteTube(q);
   });
 
   // Retrieves json data
@@ -72,8 +72,8 @@ $(document).ready(function () {
         var imageClick = encodeURIComponent($(this).attr("data-artist"));
         artistInfo(imageClick);
         getSim(imageClick);
-        tasteTube(imageClick);
         artistBanner(imageClick);
+        tasteTube(imageClick);
       });
     });
   }
@@ -117,19 +117,20 @@ $(document).ready(function () {
         "artistInfo",
         JSON.stringify(image.artists[0].strBiographyEN)
       );
-      location.href = "searched.html";
+      
     });
   }
   // Tastedive to get YouTube video IDs
   function tasteTube (parameter) {
     $.ajax({
-      url: "https://tastedive.com/api/similar?q=" + parameter + "&k=381507-MusicDas-C11G38P9&info=1",
+      url: "https://tastedive.com/api/similar?q=" + parameter + "&k=381507-MusicDas-C11G38P9&info=1&limit=1",
       method: "GET",
       crossDomain: true,
       dataType: "jsonp",
     }).then(function (videoID) {
       console.log(videoID.Similar.Info[0]);
       localStorage.setItem("youTube", JSON.stringify(videoID.Similar.Info[0].yID))
+      location.href = "searched.html";
     })
   }
 });
