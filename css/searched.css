@@ -19,17 +19,17 @@ h6 {
 
 p {
   font-size: 16px;
-  color: white;
+  color: whitesmoke;
 }
 
 h2 {
   font-size: 26px;
-  color: white;
+  color: whitesmoke;
 }
 
 h5 {
   font-size: 20px;
-  color: white;
+  color: whitesmoke;
 }
 
 .grid-container {
@@ -38,15 +38,56 @@ h5 {
 }
 
 /* navbar */
+.menu-text {
+  font-family: "Raleway", sans-serif;
+  color:whitesmoke !important;
+}
+
 .top-bar-right {
   width: 40%;
 }
-
 
 .search-input {
   border-radius: 30px;
   width: 100%;
 }
+
+a {
+  color: whitesmoke;
+  font-weight: bolder;
+}
+
+a:hover {
+color: lightgray;
+}
+
+a:active {
+  color: lightgray;
+}
+
+.button {
+  color: white;
+  background-color: darkgray;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+}
+
+.button:active {
+  color: white;
+  background-color: #666666;
+  font-family: "Raleway", sans-serif;
+  font-weight: bolder;
+}
+
+.button:hover {
+  color: white;
+  background-color: #666666;
+  font-family: "Raleway", sans-serif;
+  font-weight: bolder;
+}
+
+
+
 
 /* header */
 #searched-artist {
@@ -64,7 +105,8 @@ h5 {
   font-family: "Recursive", sans-serif;
   font-size: 36px;
   padding-bottom: 20px;
-  color: white;
+  color: whitesmoke;
+  text-shadow: 3px 3px #333333;
 }
 
 /* similar artist section */
@@ -86,28 +128,25 @@ h5 {
     background-repeat: no-repeat;
 }
 
-
-
 .artist-info:hover {
-    background: black;
+  opacity: .85;
+  filter:contrast(120%);
 }
 
 .artist-name {
     padding: 10px 0px 40px 0px;
 }
 
-.rock {
-  border: solid red 2px;
-}
 
 /* media queries */
 @media (max-width: 600px) {
-.artist-info {
-    background: url(../images/iggy_pop.jpg);
-    width: 130px;
-    height: 130px;
-    background-size: cover;
-    background-position: top;
-    border-radius: 50%;
-    background-repeat: no-repeat;
+  .artist-info {
+      background: url(../images/iggy_pop.jpg);
+      width: 130px;
+      height: 130px;
+      background-size: cover;
+      background-position: top;
+      border-radius: 50%;
+      background-repeat: no-repeat;
+  }
 }
