@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  // Variables to grab elements on the homepage
+  // Variables for search bar
   var searchInput = $("#searchInput");
   var searchBtn = $("#button-addon2");
 
@@ -68,7 +68,7 @@ $(document).ready(function () {
     });
   }
 
-  // Function for search bar
+  // Function to get similar artists
   function getSim(event) {
     console.log(event);
     $.ajax({
