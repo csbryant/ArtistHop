@@ -21,7 +21,17 @@ $(document).ready(function () {
   // Array to push json data into
   var similarArtists = [];
 
-// Retrieves json data
+  // Event listener for search bar
+  searchBtn.click(function (event) {
+    event.preventDefault();
+    var q = searchInput.val().trim();
+    artistInfo(q);
+    getSim(q);
+    tasteTube(q);
+    artistBanner(q);
+  });
+
+  // Retrieves json data
   if (localStorage.getItem("artistName") === null) {
     console.log("Local storage is null");
   } else var retName = JSON.parse(localStorage.getItem("artistName"));
@@ -29,9 +39,11 @@ $(document).ready(function () {
   var retArtists = JSON.parse(localStorage.getItem("similarArtists"));
   var retBanner = JSON.parse(localStorage.getItem("artistBanner"));
   $("#artist-name").text(retName);
+  var retVideo = JSON.parse(localStorage.getItem("youTube"));
   $("#bio").text(retInfo);
   // console.log(retArtists);
   $("#searched-artist").css("background-image", "url(" + retBanner + ")");
+  $("iframe").attr("src", "https://www.youtube.com/embed/" + retVideo)
   for (var i = 0; i < retArtists.length; i++) {
     similarArtists.push(retArtists[i].name);
   }
@@ -56,10 +68,11 @@ $(document).ready(function () {
       $("#name" + index).text(parameter);
       $("#artist" + index).on("click", function () {
         console.log($(this).attr("data-artist"));
-        
+
         var imageClick = encodeURIComponent($(this).attr("data-artist"));
         artistInfo(imageClick);
         getSim(imageClick);
+        tasteTube(imageClick);
         artistBanner(imageClick);
       });
     });
@@ -106,5 +119,17 @@ $(document).ready(function () {
       );
       location.href = "searched.html";
     });
+  }
+  // Tastedive to get YouTube video IDs
+  function tasteTube (parameter) {
+    $.ajax({
+      url: "https://tastedive.com/api/similar?q=" + parameter + "&k=381507-MusicDas-C11G38P9&info=1",
+      method: "GET",
+      crossDomain: true,
+      dataType: "jsonp",
+    }).then(function (videoID) {
+      console.log(videoID.Similar.Info[0]);
+      localStorage.setItem("youTube", JSON.stringify(videoID.Similar.Info[0].yID))
+    })
   }
 });
