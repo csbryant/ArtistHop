@@ -91,22 +91,28 @@ a:active {
 
 /* header */
 #searched-artist {
-  height: 60vh;
-  background: linear-gradient(
+  height: 30vh;
+  background:
+   linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0) 0%,
       rgba(0, 0, 0, 0) 59%,
       rgba(0, 0, 0, 0.65) 100%
     );
-  background-position: center center;
+  background-position-y: 28%;
+  background-position-x: center;
+  background-size: cover;
+  filter: grayscale(100%) blur(1px);
 }
 
 #artist-name {
   font-family: "Recursive", sans-serif;
-  font-size: 36px;
+  font-size: 45px;
   padding-bottom: 20px;
   color: whitesmoke;
-  text-shadow: 3px 3px #333333;
+  text-shadow: 3px 3px 1px #333333;
+  position: absolute;
+  top: 6%;
 }
 
 /* similar artist section */
@@ -148,5 +154,15 @@ a:active {
       background-position: top;
       border-radius: 50%;
       background-repeat: no-repeat;
+  }
+
+  #artist-name {
+    font-family: "Recursive", sans-serif;
+    font-size: 45px;
+    padding-bottom: 20px;
+    color: whitesmoke;
+    text-shadow: 3px 3px 1px #333333;
+    position: absolute;
+    top: 18%;
   }
 }
