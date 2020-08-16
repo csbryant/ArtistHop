@@ -130,12 +130,14 @@ a:active {
 /* header */
 .artist-picture {
   height: 60vh;
+  width: 100%;
   /* background-position-y: 28%;
   background-position-x: bottom; */
   background-size: cover;
   padding: 0px;
   margin: 0px;
   background-repeat: no-repeat;
+  background-position: center;
   position: relative;  
 }
 
