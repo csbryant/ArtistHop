@@ -45,7 +45,7 @@ $(document).ready(function () {
   $("#searched-artist").css("background-image", "url(" + retBanner + ")");
   $("iframe").attr("src", "https://www.youtube.com/embed/" + retVideo)
   for (var i = 0; i < retArtists.length; i++) {
-    similarArtists.push(retArtists[i].name);
+    similarArtists.push(retArtists[i].Name);
   }
   similarArtists.forEach(getImages);
 
@@ -78,20 +78,23 @@ $(document).ready(function () {
     });
   }
 
-  // Function to get similar artists
-  function getSim(event) {
-    console.log(event);
-    $.ajax({
-      url: lastFMURL + getSimilarArtists + event + apiKey,
-      method: "GET",
-    }).then(function (artists) {
-      // console.log(artists.similarartists.artist)
-      localStorage.setItem(
-        "similarArtists",
-        JSON.stringify(artists.similarartists.artist)
-      );
-    });
-  }
+
+    // Get Similar Artist
+    function getSim(event) {
+      $.ajax({
+        url: "https://tastedive.com/api/similar?limit=8&q=" + event,
+        method: "GET",
+        crossDomain: true,
+        dataType: "jsonp",
+      }).then(function (artists) {
+        console.log(artists.Similar.Results);
+        localStorage.setItem(
+          "similarArtists",
+          JSON.stringify(artists.Similar.Results)
+        );
+      });
+    }
+  
   // Function to get artist info
   function artistInfo(parameter) {
     $.ajax({

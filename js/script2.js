@@ -28,6 +28,7 @@ $(document).ready(function () {
     artistInfo(q);
     getSim(q);
     artistBanner(q);
+    tasteTube(q);
   });
 
   //Ajax called to get Top Artist
@@ -59,7 +60,7 @@ $(document).ready(function () {
       $("#image" + index).append($("<p>").text(parameter));
       $("#image" + index).on("click", function () {
         console.log($(this).attr("data-artist"));
-        
+
         var imageClick = encodeURIComponent($(this).attr("data-artist"));
         artistInfo(imageClick);
         getSim(imageClick);
@@ -68,27 +69,29 @@ $(document).ready(function () {
     });
   }
 
-  // Function to get similar artists
+  // Get Similar Artist
   function getSim(event) {
-    console.log(event);
     $.ajax({
-      url: lastFMURL + getSimilarArtists + event + apiKey,
+      url: "https://tastedive.com/api/similar?limit=8&q=" + event,
       method: "GET",
+      crossDomain: true,
+      dataType: "jsonp",
     }).then(function (artists) {
-      // console.log(artists.similarartists.artist)
+      console.log(artists.Similar.Results);
       localStorage.setItem(
         "similarArtists",
-        JSON.stringify(artists.similarartists.artist)
+        JSON.stringify(artists.Similar.Results)
       );
     });
   }
+
   // Function to get artist info
   function artistInfo(parameter) {
     $.ajax({
       url: lastFMURL + getArtistInfo + parameter + apiKey,
       method: "GET",
     }).then(function (artists) {
-      console.log(artists);
+      // console.log(artists);
       localStorage.setItem("artistName", JSON.stringify(artists.artist.name));
     });
   }
