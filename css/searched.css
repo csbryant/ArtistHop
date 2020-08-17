@@ -258,8 +258,8 @@ a:active {
 
   .artist-info {
       /* background: url(../images/iggy_pop.jpg); */
-      width: 100px;
-      height: 100px;
+      width: 160px;
+      height: 160px;
       background-size: cover;
       background-position: top;
       border-radius: 50%;
