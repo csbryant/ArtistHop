@@ -18,167 +18,230 @@
     <link rel="stylesheet" href="./css/searched.css" />
   </head>
   <body>
+    <div class="grid-y medium-grid-frame">
+      <div class="cell medium-auto medium-cell-block-container">
+        <div class="grid-x grid-padding-x">
+          <!-- sidebar -->
+          <div class="cell medium-2 medium-cell-block-y small-hidden sidebar">
+            <div class="grid-x align-middle">
+              <div class="cell medium-12 sidebar-section">
+                <h4>Browse Music</h4>
+                <hr/>
+              </div>
+            </div>
+            <div class="grid-x sidebar-menu">
+              <div class="medium-2">
+                <a href="../GroupProject1/index.html"
+                  ><img
+                    src="../GroupProject1/images/disc.svg"
+                    alt="top ten icon"
+                /></a>
+              </div>
 
-    <div class="wrap">
+              <div class="medium-10">
+                <a href="../GroupProject1/index.html"><p>Top Charts</p></a>
+              </div>
+            </div>
+            <div class="grid-x sidebar-menu">
+              <div class="medium-2">
+                <a href="../GroupProject1/index.html"
+                  ><img
+                    src="../GroupProject1/images/Notes.svg"
+                    alt="top ten icon"
+                /></a>
+              </div>
+
+              <div class="medium-10">
+                <a href=""><p>Playlists (coming soon)</p></a>
+              </div>
+            </div>
+          </div>
+
+          
+
+          <!-- main container   -->
+          <div class="cell medium-10 medium-cell-block-y" style="padding: 0px">
+            <!-- artist container -->
+
+            <!-- Search -->
+            <div class="grid-container fluid" style="padding: 0px; margin: 0px">
+              <form>
+                <div class="grid-container" style="padding: 0px; margin: 0px">
+                  <div class="grid-x grid-padding-x align-center" style="padding: 0px; margin: 0px">
+                    <div class="medium-10 cell" style="padding: 0px; margin: 0px">
+                      <label>
+                        <input type="text" placeholder="Search for Artist or Band" style="padding: 0px; margin: 0px; border: none; padding-left: 20px" id="searchInput">
+                      </label>
+                    </div>
+                    <div class="medium-2 cell"  style="padding: 0px; margin: 0px;">
+                      <button type="button" class="button" style="margin: 0px; border: none; box-shadow: 0px 0px; height: 100%">Search</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <!-- picture -->
+            <div
+              class="grid-container fluid artist-picture"
+              id="searched-artist" style="padding: 0px"
+          >
 
 
-    <!-- artist container -->
-
-    <!-- picture -->
-
-    <div class="grid-container fluid artist-picture" id="searched-artist"></div>
-
-    <!-- overlay -->
-    <div class="grid-container fluid picture-opacity">
-    </div>
-
-    <div class="grid-container artist-data">
 
 
-      <!-- artist name -->
-      <div class="grid-x picture-grid align-bottom">
-        <h1 id="artist-name"></h1>
+              <div class="grid-container fluid picture-opacity"></div>
+              <div class="grid-container artist-data" style="margin-left: 0px">
+                <div class="grid-x picture-grid align-bottom">
+                  <h1 id="artist-name"></h1>
+                </div>
+              </div>
+            </div>
+
+ 
+
+            <!-- section title -->
+            <div class="grid-container section-title">
+              <h3>Biography</h3>
+            </div>
+
+            <!-- artist bio -->
+            <div class="grid-container">
+              <div class="grid-x">
+                <div class="cell large-12" id="text_container">
+                  <p id="bio" class="artist-bio"></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- section title -->
+            <div class="grid-container section-title">
+              <h3>Listen to the music</h3>
+            </div>
+
+            <!-- YouTube Player -->
+            <div class="grid-container">
+              <iframe
+                width="100%"
+                height="500vh"
+                src=""
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+
+            <!-- section title -->
+            <div class="grid-container section-title">
+              <h3>Similar Artists</h3>
+            </div>
+
+            <!-- Similar Artists -->
+            <div class="grid-container similar-artists">
+              <div class="grid-x grid-margin-x">
+                <!-- artist 0 -->
+                <div class="cell large-3 medium-4 small-6">
+                  <div class="grid-y">
+                    <div class="grid-x align-center">
+                      <a class="artist-info" id="artist0"></a>
+                    </div>
+                    <div class="cell text-center artist-name">
+                      <h5 id="name0"></h5>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- artist 1 -->
+                <div class="cell large-3 medium-4 small-6">
+                  <div class="grid-y">
+                    <div class="grid-x align-center">
+                      <a class="artist-info" id="artist1"></a>
+                    </div>
+                    <div class="cell text-center artist-name">
+                      <h5 id="name1"></h5>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- artist 2 -->
+                <div class="cell large-3 medium-4 small-6">
+                  <div class="grid-y">
+                    <div class="grid-x align-center">
+                      <a class="artist-info" id="artist2"></a>
+                    </div>
+                    <div class="cell text-center artist-name">
+                      <h5 id="name2"></h5>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- artist 3 -->
+                <div class="cell large-3 medium-4 small-6">
+                  <div class="grid-y">
+                    <div class="grid-x align-center">
+                      <a class="artist-info" id="artist3"></a>
+                    </div>
+                    <div class="cell text-center artist-name">
+                      <h5 id="name3"></h5>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- artist 4 -->
+                <div class="cell large-3 medium-4 small-6">
+                  <div class="grid-y">
+                    <div class="grid-x align-center">
+                      <a class="artist-info" id="artist4"></a>
+                    </div>
+                    <div class="cell text-center artist-name">
+                      <h5 id="name4"></h5>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- artist 5 -->
+                <div class="cell large-3 medium-4 small-6">
+                  <div class="grid-y">
+                    <div class="grid-x align-center">
+                      <a class="artist-info" id="artist5"></a>
+                    </div>
+                    <div class="cell text-center artist-name">
+                      <h5 id="name5"></h5>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- artist 6 -->
+                <div class="cell large-3 medium-4 small-6">
+                  <div class="grid-y">
+                    <div class="grid-x align-center">
+                      <a class="artist-info" id="artist6"></a>
+                    </div>
+                    <div class="cell text-center artist-name">
+                      <h5 id="name6"></h5>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- artist 7 -->
+                <div class="cell large-3 medium-4 small-6">
+                  <div class="grid-y">
+                    <div class="grid-x align-center">
+                      <a class="artist-info" id="artist7"></a>
+                    </div>
+                    <div class="cell text-center artist-name">
+                      <h5 id="name7"></h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            
+          </div>
+        </div>
       </div>
     </div>
-
-    <!-- section title -->
-    <div class="grid-container section-title">
-      <h3>Biography</h3>
-    </div>
-
-    <!-- artist bio -->
-    <div class="grid-container">
-      <div class="grid-x">
-        <div class="cell large-12" id="text_container">
-          <p id="bio" class="artist-bio"></p>
-        </div>
-      </div>
-    </div>
-
-    <!-- section title -->
-    <div class="grid-container section-title">
-      <h3>Listen to the music</h3>
-    </div>
-
-    <!-- YouTube Player -->
-    <div class="grid-container">
-      <iframe
-        width="100%"
-        height="500vh"
-        src=""
-        frameborder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
-    </div>
-
-    <!-- section title -->
-    <div class="grid-container section-title">
-      <h3>Similar Artists</h3>
-    </div>
-
-    <!-- Similar Artists -->
-    <div class="grid-container similar-artists">
-      <div class="grid-x grid-margin-x">
-        <!-- artist 0 -->
-        <div class="cell large-3 medium-4 small-6">
-          <div class="grid-y">
-            <div class="grid-x align-center">
-              <a class="artist-info" id="artist0"></a>
-            </div>
-            <div class="cell text-center artist-name">
-              <h5 id="name0"></h5>
-            </div>
-          </div>
-        </div>
-
-        <!-- artist 1 -->
-        <div class="cell large-3 medium-4 small-6">
-          <div class="grid-y">
-            <div class="grid-x align-center">
-              <a class="artist-info" id="artist1"></a>
-            </div>
-            <div class="cell text-center artist-name">
-              <h5 id="name1"></h5>
-            </div>
-          </div>
-        </div>
-
-        <!-- artist 2 -->
-        <div class="cell large-3 medium-4 small-6">
-          <div class="grid-y">
-            <div class="grid-x align-center">
-              <a class="artist-info" id="artist2"></a>
-            </div>
-            <div class="cell text-center artist-name">
-              <h5 id="name2"></h5>
-            </div>
-          </div>
-        </div>
-
-        <!-- artist 3 -->
-        <div class="cell large-3 medium-4 small-6">
-          <div class="grid-y">
-            <div class="grid-x align-center">
-              <a class="artist-info" id="artist3"></a>
-            </div>
-            <div class="cell text-center artist-name">
-              <h5 id="name3"></h5>
-            </div>
-          </div>
-        </div>
-
-        <!-- artist 4 -->
-        <div class="cell large-3 medium-4 small-6">
-          <div class="grid-y">
-            <div class="grid-x align-center">
-              <a class="artist-info" id="artist4"></a>
-            </div>
-            <div class="cell text-center artist-name">
-              <h5 id="name4"></h5>
-            </div>
-          </div>
-        </div>
-
-        <!-- artist 5 -->
-        <div class="cell large-3 medium-4 small-6">
-          <div class="grid-y">
-            <div class="grid-x align-center">
-              <a class="artist-info" id="artist5"></a>
-            </div>
-            <div class="cell text-center artist-name">
-              <h5 id="name5"></h5>
-            </div>
-          </div>
-        </div>
-
-        <!-- artist 6 -->
-        <div class="cell large-3 medium-4 small-6">
-          <div class="grid-y">
-            <div class="grid-x align-center">
-              <a class="artist-info" id="artist6"></a>
-            </div>
-            <div class="cell text-center artist-name">
-              <h5 id="name6"></h5>
-            </div>
-          </div>
-        </div>
-
-        <!-- artist 7 -->
-        <div class="cell large-3 medium-4 small-6">
-          <div class="grid-y">
-            <div class="grid-x align-center">
-              <a class="artist-info" id="artist7"></a>
-            </div>
-            <div class="cell text-center artist-name">
-              <h5 id="name7"></h5>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
 
     <script
       src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -186,9 +249,11 @@
       crossorigin="anonymous"
     ></script>
     <script src="js/artist.js"></script>
-    <script type="text/javascript"
-  src="https://www.viralpatel.net/demo/jquery/jquery.shorten.1.0.js"></script>
-  <script src="../GroupProject1/js/vendor/readmore.js"></script>
+    <script
+      type="text/javascript"
+      src="https://www.viralpatel.net/demo/jquery/jquery.shorten.1.0.js"
+    ></script>
+    <script src="../GroupProject1/js/vendor/readmore.js"></script>
     <script src="js/vendor/jquery.js"></script>
     <script src="js/vendor/what-input.js"></script>
     <script src="js/vendor/foundation.js"></script>
