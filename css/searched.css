@@ -279,6 +279,23 @@ a:active {
   .small-hidden {
     display: none;
   }
+
+  .small-block {
+    display: inline;
+  }
+
+  .icon {
+    text-align: center;
+    padding-top: 10px;
+  }
+
+  .text-icon {
+    text-align: center;
+    padding-top: 10px;
+  }
+
+ 
+
   
 
 }
