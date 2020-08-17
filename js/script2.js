@@ -25,8 +25,8 @@ $(document).ready(function () {
   searchBtn.click(function (event) {
     event.preventDefault();
     var q = searchInput.val().trim();
-    artistInfo(q);
     getSim(q);
+    artistInfo(q);
     artistBanner(q);
     tasteTube(q);
   });
@@ -62,9 +62,10 @@ $(document).ready(function () {
         console.log($(this).attr("data-artist"));
 
         var imageClick = encodeURIComponent($(this).attr("data-artist"));
-        artistInfo(imageClick);
         getSim(imageClick);
+        artistInfo(imageClick); 
         artistBanner(imageClick);
+        tasteTube(imageClick);
       });
     });
   }
@@ -109,6 +110,24 @@ $(document).ready(function () {
       localStorage.setItem(
         "artistInfo",
         JSON.stringify(image.artists[0].strBiographyEN)
+      );
+    });
+  }
+
+  function tasteTube(parameter) {
+    $.ajax({
+      url:
+        "https://tastedive.com/api/similar?q=" +
+        parameter +
+        "&k=381507-MusicDas-C11G38P9&info=1&limit=1",
+      method: "GET",
+      crossDomain: true,
+      dataType: "jsonp",
+    }).then(function (videoID) {
+      console.log(videoID.Similar.Info[0]);
+      localStorage.setItem(
+        "youTube",
+        JSON.stringify(videoID.Similar.Info[0].yID)
       );
       location.href = "searched.html";
     });
