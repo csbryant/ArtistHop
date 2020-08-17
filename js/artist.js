@@ -40,7 +40,8 @@ $(document).ready(function () {
   var retBanner = JSON.parse(localStorage.getItem("artistBanner"));
   $("#artist-name").text(retName);
   var retVideo = JSON.parse(localStorage.getItem("youTube"));
-  $("#bio").text(retInfo);
+  $(".artist-bio").text(retInfo);
+  
   // console.log(retArtists);
   $("#searched-artist").css("background-image", "url(" + retBanner + ")");
   $("iframe").attr("src", "https://www.youtube.com/embed/" + retVideo);
