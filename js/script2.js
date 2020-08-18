@@ -24,9 +24,6 @@ $(document).ready(function () {
     event.preventDefault();
     var q = searchInput.val().trim();
     getSim(q);
-    // artistInfo(q);
-    artistBanner(q);
-    tasteTube(q);
   });
 
   //Ajax called to get Top Artist
@@ -61,17 +58,14 @@ $(document).ready(function () {
 
         var imageClick = encodeURIComponent($(this).attr("data-artist"));
         getSim(imageClick);
-        // artistInfo(imageClick); 
-        artistBanner(imageClick);
-        tasteTube(imageClick);
       });
     });
   }
 
   // Get Similar Artist
-  function getSim(event) {
+  function getSim(artistName) {
     $.ajax({
-      url: "https://tastedive.com/api/similar?limit=20&q=" + event,
+      url: "https://tastedive.com/api/similar?limit=20&q=" + artistName,
       method: "GET",
       crossDomain: true,
       dataType: "jsonp",
@@ -81,6 +75,7 @@ $(document).ready(function () {
         "similarArtists",
         JSON.stringify(artists.Similar.Results)
       );
+      artistBanner(artistName);
     });
   }
 
@@ -96,9 +91,9 @@ $(document).ready(function () {
   // }
 
   // Saving artist banner
-  function artistBanner(parameter) {
+  function artistBanner(artistName) {
     $.ajax({
-      url: url2 + parameter,
+      url: url2 + artistName,
       method: "GET",
     }).then(function (image) {
       console.log(image.artists[0]);
@@ -114,15 +109,16 @@ $(document).ready(function () {
         "artistInfo",
         JSON.stringify(image.artists[0].strBiographyEN)
       );
+      tasteTube(artistName);
     });
   }
 
   // Gets a YouTube video ID
-  function tasteTube(parameter) {
+  function tasteTube(artistName) {
     $.ajax({
       url:
         "https://tastedive.com/api/similar?q=" +
-        parameter +
+        artistName +
         "&k=381507-MusicDas-C11G38P9&info=1&limit=1",
       method: "GET",
       crossDomain: true,
