@@ -45,6 +45,7 @@ $(document).ready(function () {
   // Sets elements on page
   $("#artist-name").text(retName);
   $(".artist-bio").text(retInfo);
+
   $("#searched-artist").css("background-image", "url(" + retBanner + ")");
   $("iframe").attr("src", "https://www.youtube.com/embed/" + retVideo);
   for (var i = 0; i < retArtists.length; i++) {
@@ -52,6 +53,9 @@ $(document).ready(function () {
   }
   similarArtists.forEach(getImages);
 
+  var similarartistcount = [];
+  console.log(similarartistcount);
+  
   // Ajax called to get artist Images
   function getImages(parameter) {
     console.log("--->", parameter);
@@ -59,33 +63,57 @@ $(document).ready(function () {
       url: audioDB + encodeURIComponent(parameter),
       method: "GET",
     }).then(function (data) {
-      // console.log(data);
-      var index = similarArtists.indexOf(parameter);
-      // console.log(data.artists[0].strArtistThumb);
-      $("#artist" + index).css(
-        "background-image",
-        "url(" + data.artists[0].strArtistThumb + ")"
-      );
-      $("#artist" + index).attr("data-artist", parameter);
-      $("#name" + index).text(parameter);
-      $("#artist" + index).on("click", function () {
-        // console.log($(this).attr("data-artist"));
-        var imageClick = encodeURIComponent($(this).attr("data-artist"));
-        // artistInfo(imageClick);
-        getSim(imageClick);
-        artistBanner(imageClick);
-        tasteTube(imageClick);
-        $( document ).ajaxStop(function() {
-          console.log("Wait")
-        })
-      });
+
+      var artistPic = data.artists[0].strArtistThumb;
+
+      if (artistPic && similarartistcount.length <= 7) {
+        console.log(data);
+        var index = similarArtists.indexOf(parameter);
+        similarartistcount.push(data.artists[0].strArtistThumb);
+
+        // create the html for similar artists
+        var similarArtistsGrid = $(".similar-artists-grid");
+
+        var similarArtistsCell = $("<div>").addClass(
+          "cell large-3 medium-4 small-6"
+        );
+        similarArtistsGrid.append(similarArtistsCell);
+        var gridY = $("<div>").addClass("grid-y");
+        similarArtistsCell.append(gridY);
+        var gridXAlignCenter = $("<div>").addClass("grid-x align-center");
+        gridY.append(gridXAlignCenter);
+        var artistLink = $("<a>").addClass("artist-info");
+        gridXAlignCenter.append(artistLink);
+        var artistNameDiv = $("<div>").addClass("cell text-center artist-name");
+        gridY.append(artistNameDiv);
+        var h5 = $("<h5>");
+        artistNameDiv.append(h5);
+
+        // console.log(parameter, "---->", artistPic);
+        $(artistLink).css(
+          "background-image",
+          "url(" + data.artists[0].strArtistThumb + ")"
+        );
+        $(artistLink).attr("data-artist", parameter);
+        $(h5).text(parameter);
+        $(".artist-info").on("click", function () {
+          console.log($(this).attr("data-artist"));
+
+          var imageClick = encodeURIComponent($(this).attr("data-artist"));
+          getSim(imageClick);
+          artistInfo(imageClick);
+          artistBanner(imageClick);
+          tasteTube(imageClick);
+        });
+      }
+
     });
   }
 
   // Get Similar Artist
   function getSim(event) {
     $.ajax({
-      url: "https://tastedive.com/api/similar?limit=8&q=" + event,
+      url: "https://tastedive.com/api/similar?limit=20&q=" + event,
       method: "GET",
       crossDomain: true,
       dataType: "jsonp",

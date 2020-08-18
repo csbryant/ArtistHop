@@ -71,7 +71,7 @@ $(document).ready(function () {
   // Get Similar Artist
   function getSim(event) {
     $.ajax({
-      url: "https://tastedive.com/api/similar?limit=8&q=" + event,
+      url: "https://tastedive.com/api/similar?limit=20&q=" + event,
       method: "GET",
       crossDomain: true,
       dataType: "jsonp",
