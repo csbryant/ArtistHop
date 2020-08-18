@@ -6,11 +6,9 @@ $(document).ready(function () {
   // API URL Variables
   var lastFMURL = "https://ws.audioscrobbler.com/2.0/?method=";
 
-  var getSimilarArtists = "artist.getsimilar&artist=";
-
   var getTopArtists = "chart.getTopArtists";
 
-  var getArtistInfo = "artist.getinfo&artist=";
+  // var getArtistInfo = "artist.getinfo&artist=";
 
   var apiKey = "&api_key=6c1bc3108e57d5a4c6eca326981bfaa6&limit=8&format=json";
 
@@ -26,7 +24,7 @@ $(document).ready(function () {
     event.preventDefault();
     var q = searchInput.val().trim();
     getSim(q);
-    artistInfo(q);
+    // artistInfo(q);
     artistBanner(q);
     tasteTube(q);
   });
@@ -63,7 +61,7 @@ $(document).ready(function () {
 
         var imageClick = encodeURIComponent($(this).attr("data-artist"));
         getSim(imageClick);
-        artistInfo(imageClick); 
+        // artistInfo(imageClick); 
         artistBanner(imageClick);
         tasteTube(imageClick);
       });
@@ -87,15 +85,16 @@ $(document).ready(function () {
   }
 
   // Function to get artist info
-  function artistInfo(parameter) {
-    $.ajax({
-      url: lastFMURL + getArtistInfo + parameter + apiKey,
-      method: "GET",
-    }).then(function (artists) {
-      // console.log(artists);
-      localStorage.setItem("artistName", JSON.stringify(artists.artist.name));
-    });
-  }
+  // function artistInfo(parameter) {
+  //   $.ajax({
+  //     url: lastFMURL + getArtistInfo + parameter + apiKey,
+  //     method: "GET",
+  //   }).then(function (artists) {
+  //     // console.log(artists);
+  //     localStorage.setItem("artistName", JSON.stringify(artists.artist.name));
+  //   });
+  // }
+
   // Saving artist banner
   function artistBanner(parameter) {
     $.ajax({
@@ -103,6 +102,10 @@ $(document).ready(function () {
       method: "GET",
     }).then(function (image) {
       console.log(image.artists[0]);
+      localStorage.setItem(
+        "artistName",
+        JSON.stringify(image.artists[0].strArtist)
+      );
       localStorage.setItem(
         "artistBanner",
         JSON.stringify(image.artists[0].strArtistThumb)
@@ -114,6 +117,7 @@ $(document).ready(function () {
     });
   }
 
+  // Gets a YouTube video ID
   function tasteTube(parameter) {
     $.ajax({
       url:
