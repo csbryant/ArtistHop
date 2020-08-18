@@ -41,7 +41,7 @@ $(document).ready(function () {
   $("#artist-name").text(retName);
   var retVideo = JSON.parse(localStorage.getItem("youTube"));
   $(".artist-bio").text(retInfo);
-  
+
   // console.log(retArtists);
   $("#searched-artist").css("background-image", "url(" + retBanner + ")");
   $("iframe").attr("src", "https://www.youtube.com/embed/" + retVideo);
@@ -57,25 +57,49 @@ $(document).ready(function () {
       url: url2 + encodeURIComponent(parameter),
       method: "GET",
     }).then(function (data) {
-      console.log(data);
-      var index = similarArtists.indexOf(parameter);
-      console.log(data.artists[0].strArtistThumb);
 
-      $("#artist" + index).css(
-        "background-image",
-        "url(" + data.artists[0].strArtistThumb + ")"
-      );
-      $("#artist" + index).attr("data-artist", parameter);
-      $("#name" + index).text(parameter);
-      $("#artist" + index).on("click", function () {
-        console.log($(this).attr("data-artist"));
+      var artistPic = data.artists[0].strArtistThumb;
 
-        var imageClick = encodeURIComponent($(this).attr("data-artist"));
-        getSim(imageClick);
-        artistInfo(imageClick);
-        artistBanner(imageClick);
-        tasteTube(imageClick);
-      });
+      if (artistPic) {
+        console.log(data);
+        var index = similarArtists.indexOf(parameter);
+        console.log(data.artists[0].strArtistThumb);
+
+        // create the html for similar artists
+        var similarArtistsGrid = $(".similar-artists-grid");
+
+        var similarArtistsCell = $("<div>").addClass(
+          "cell large-3 medium-4 small-6"
+        );
+        similarArtistsGrid.append(similarArtistsCell);
+        var gridY = $("<div>").addClass("grid-y");
+        similarArtistsCell.append(gridY);
+        var gridXAlignCenter = $("<div>").addClass("grid-x align-center");
+        gridY.append(gridXAlignCenter);
+        var artistLink = $("<a>").addClass("artist-info");
+        gridXAlignCenter.append(artistLink);
+        var artistNameDiv = $("<div>").addClass("cell text-center artist-name");
+        gridY.append(artistNameDiv);
+        var h5 = $("<h5>");
+        artistNameDiv.append(h5);
+
+        // console.log(parameter, "---->", artistPic);
+        $(artistLink).css(
+          "background-image",
+          "url(" + data.artists[0].strArtistThumb + ")"
+        );
+        $(artistLink).attr("data-artist", parameter);
+        $(h5).text(parameter);
+        $(".artist-info").on("click", function () {
+          console.log($(this).attr("data-artist"));
+
+          var imageClick = encodeURIComponent($(this).attr("data-artist"));
+          getSim(imageClick);
+          artistInfo(imageClick);
+          artistBanner(imageClick);
+          tasteTube(imageClick);
+        });
+      }
     });
   }
 
@@ -142,3 +166,4 @@ $(document).ready(function () {
     });
   }
 });
+
