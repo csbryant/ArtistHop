@@ -1,13 +1,16 @@
-# GroupProject1
+##Jukebox 2.0
 
-when similar artists are returned as null, we need a placeholder or something to show the user you can't access that artist
+LINK HERE
 
-or we could replace them with artists until we get 8
+Jukebox 2.0 is a music app that helps users search for similar artists.
 
-need to fix search bar issues (both pages)
+The home page displays this week's top trending artists. You can click on any of these artists to find artists with similar music. The user can also search for any artist in the search bar.
 
-NEED MUSIC!!!!
--add YouTube videos to page
+When you search or click on an artist: you'll find a biography of that artist, a link to a youtube video of one of their music videos, and similar artist's listed below. Any artist can be clicked on to help you find new music from any period and genre.
 
-maybe change similar artist api to tastedive
 
+#Credits
+
+Created by Oscar Ledezma, Stuart Wong, Pierre Pariente, and Chris Bryant.
+
+API's used: Last FM, TasteDive, and Audio DB.
