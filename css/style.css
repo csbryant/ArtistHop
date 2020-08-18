@@ -94,3 +94,11 @@ p {
   justify-content: center;
   padding-bottom: 20px;
 }
+
+@media (max-width: 414px) {
+
+  .artists img{
+      width: 160px;
+      height: 160px;
+  }
+}
