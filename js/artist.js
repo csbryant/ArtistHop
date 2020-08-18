@@ -26,11 +26,6 @@ $(document).ready(function () {
     var q = searchInput.val().trim();
     // artistInfo(q);
     getSim(q);
-    artistBanner(q);
-    tasteTube(q);
-    $( document ).ajaxStop(function() {
-      console.log("Wait")
-    })
   });
 
   // Retrieves json data
@@ -45,17 +40,21 @@ $(document).ready(function () {
   // Sets elements on page
   $("#artist-name").text(retName);
   $(".artist-bio").text(retInfo);
-
-  $("#searched-artist").css("background-image", "url(" + retBanner + ")");
+   $("#searched-artist").css("background-image", "url(" + retBanner + ")");
   $("iframe").attr("src", "https://www.youtube.com/embed/" + retVideo);
+
+  if (retArtists.length === 0) {
+    $("#h3").css("display", "none")
+  } else {
   for (var i = 0; i < retArtists.length; i++) {
     similarArtists.push(retArtists[i].Name);
   }
   similarArtists.forEach(getImages);
+}
 
   var similarartistcount = [];
   console.log(similarartistcount);
-  
+
   // Ajax called to get artist Images
   function getImages(parameter) {
     console.log("--->", parameter);
@@ -63,7 +62,6 @@ $(document).ready(function () {
       url: audioDB + encodeURIComponent(parameter),
       method: "GET",
     }).then(function (data) {
-
       var artistPic = data.artists[0].strArtistThumb;
 
       if (artistPic && similarartistcount.length <= 7) {
@@ -101,19 +99,15 @@ $(document).ready(function () {
 
           var imageClick = encodeURIComponent($(this).attr("data-artist"));
           getSim(imageClick);
-          artistInfo(imageClick);
-          artistBanner(imageClick);
-          tasteTube(imageClick);
         });
       }
-
     });
   }
 
   // Get Similar Artist
-  function getSim(event) {
+  function getSim(artistName) {
     $.ajax({
-      url: "https://tastedive.com/api/similar?limit=20&q=" + event,
+      url: "https://tastedive.com/api/similar?limit=20&q=" + artistName,
       method: "GET",
       crossDomain: true,
       dataType: "jsonp",
@@ -123,6 +117,7 @@ $(document).ready(function () {
         "similarArtists",
         JSON.stringify(artists.Similar.Results)
       );
+      artistBanner(artistName);
     });
   }
 
@@ -138,9 +133,9 @@ $(document).ready(function () {
   // }
 
   // Saving artist banner
-  function artistBanner(parameter) {
+  function artistBanner(artistName) {
     $.ajax({
-      url: audioDB + parameter,
+      url: audioDB + artistName,
       method: "GET",
     }).then(function (image) {
       console.log(image.artists[0]);
@@ -156,15 +151,16 @@ $(document).ready(function () {
         "artistInfo",
         JSON.stringify(image.artists[0].strBiographyEN)
       );
+      tasteTube(artistName);
     });
   }
 
   // Tastedive to get YouTube video IDs
-  function tasteTube(parameter) {
+  function tasteTube(artistName) {
     $.ajax({
       url:
         "https://tastedive.com/api/similar?q=" +
-        parameter +
+        artistName +
         "&k=381507-MusicDas-C11G38P9&info=1&limit=1",
       method: "GET",
       crossDomain: true,
@@ -175,8 +171,7 @@ $(document).ready(function () {
         "youTube",
         JSON.stringify(videoID.Similar.Info[0].yID)
       );
-    // location.href = "searched.html";
+      location.href = "searched.html";
     });
   }
-  
 });
