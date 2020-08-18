@@ -50,6 +50,9 @@ $(document).ready(function () {
   }
   similarArtists.forEach(getImages);
 
+  var similarartistcount = [];
+  console.log(similarartistcount);
+  
   // Ajax called to get artist Images
   function getImages(parameter) {
     console.log("--->", parameter);
@@ -57,13 +60,12 @@ $(document).ready(function () {
       url: url2 + encodeURIComponent(parameter),
       method: "GET",
     }).then(function (data) {
-
       var artistPic = data.artists[0].strArtistThumb;
 
-      if (artistPic) {
+      if (artistPic && similarartistcount.length <= 7) {
         console.log(data);
         var index = similarArtists.indexOf(parameter);
-        console.log(data.artists[0].strArtistThumb);
+        similarartistcount.push(data.artists[0].strArtistThumb);
 
         // create the html for similar artists
         var similarArtistsGrid = $(".similar-artists-grid");
@@ -106,7 +108,7 @@ $(document).ready(function () {
   // Get Similar Artist
   function getSim(event) {
     $.ajax({
-      url: "https://tastedive.com/api/similar?limit=8&q=" + event,
+      url: "https://tastedive.com/api/similar?limit=20&q=" + event,
       method: "GET",
       crossDomain: true,
       dataType: "jsonp",
@@ -166,4 +168,3 @@ $(document).ready(function () {
     });
   }
 });
-
