@@ -1,4 +1,4 @@
-##Jukebox 2.0
+##JukeBox 2.0
 
 LINK HERE
 
