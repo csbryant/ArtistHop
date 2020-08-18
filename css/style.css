@@ -7,11 +7,16 @@ background: rgb(26, 26, 26);
 }
 
 header {
-  margin-top: 20px;
-  color: whitesmoke;
-  text-align: center;
-  font-size: 40px;
-  font-family: "Raleway", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.mainlogo {
+  width: 45%;
+  height: auto;
+  margin: 0px;
 }
 
 h1,
@@ -66,7 +71,7 @@ color: white;
   margin-top: 30px;
 }
 
-img {
+.artists img {
   margin: 10px;
   width: 200px;
   height: 200px;
@@ -76,7 +81,7 @@ img {
   justify-content: center;
 }
 
-img:hover {
+.artists img:hover {
   opacity: .85;
   filter:contrast(120%);
 }
