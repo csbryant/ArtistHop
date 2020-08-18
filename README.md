@@ -1,10 +1,10 @@
-## JukeBox 2.0
+## ArtistHop
 
 <a href="https://csbryant.github.io/GroupProject1/">LINK HERE</a>
 
-<img src= "https://raw.githubusercontent.com/csbryant/GroupProject1/master/images/1.png">
+<img src= "https://raw.githubusercontent.com/csbryant/GroupProject1/master/images/AH1.png">
 
-Jukebox 2.0 is a music app that helps users search for similar artists.
+ArtistHop is a music app that helps users search for similar artists.
 
 The home page displays this week's top trending artists. You can click on any of these artists to find artists with similar music. The user can also search for any artist in the search bar.
 
