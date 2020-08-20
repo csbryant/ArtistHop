@@ -5,15 +5,9 @@ $(document).ready(function () {
 
   // API URL Variables
   var lastFMURL = "https://ws.audioscrobbler.com/2.0/?method=";
-
   var getTopArtists = "chart.getTopArtists";
-
-  // var getArtistInfo = "artist.getinfo&artist=";
-
   var apiKey = "&api_key=6c1bc3108e57d5a4c6eca326981bfaa6&limit=8&format=json";
-
   var url = lastFMURL + getTopArtists + apiKey;
-
   var url2 = "https://www.theaudiodb.com/api/v1/json/1/search.php?s=";
 
   // Top Artist Variable
@@ -23,7 +17,7 @@ $(document).ready(function () {
   searchBtn.click(function (event) {
     event.preventDefault();
     var q = searchInput.val().trim();
-    getSim(q);
+    artistBanner(q);
   });
 
   //Ajax called to get Top Artist
@@ -54,11 +48,37 @@ $(document).ready(function () {
       $("#image" + index).attr("data-artist", parameter);
       $("#image" + index).append($("<p>").text(parameter));
       $("#image" + index).on("click", function () {
-        console.log($(this).attr("data-artist"));
-
+        // console.log($(this).attr("data-artist"));
         var imageClick = encodeURIComponent($(this).attr("data-artist"));
-        getSim(imageClick);
+        artistBanner(imageClick);
       });
+    });
+  }
+
+  // Saving artist banner
+  function artistBanner(artistName) {
+    $.ajax({
+      url: url2 + artistName,
+      method: "GET",
+    }).then(function (image) {
+      if (image.artists === null){
+        location.href = "index.html";
+      } else {
+        console.log(image.artists[0]);
+        localStorage.setItem(
+          "artistName",
+          JSON.stringify(image.artists[0].strArtist)
+          );
+          localStorage.setItem(
+            "artistBanner",
+            JSON.stringify(image.artists[0].strArtistThumb)
+            );
+            localStorage.setItem(
+              "artistInfo",
+              JSON.stringify(image.artists[0].strBiographyEN)
+              );
+              getSim(artistName);
+            }
     });
   }
 
@@ -70,44 +90,10 @@ $(document).ready(function () {
       crossDomain: true,
       dataType: "jsonp",
     }).then(function (artists) {
-      console.log(artists.Similar.Results);
+      // console.log(artists.Similar.Results);
       localStorage.setItem(
         "similarArtists",
         JSON.stringify(artists.Similar.Results)
-      );
-      artistBanner(artistName);
-    });
-  }
-
-  // Function to get artist info
-  // function artistInfo(parameter) {
-  //   $.ajax({
-  //     url: lastFMURL + getArtistInfo + parameter + apiKey,
-  //     method: "GET",
-  //   }).then(function (artists) {
-  //     // console.log(artists);
-  //     localStorage.setItem("artistName", JSON.stringify(artists.artist.name));
-  //   });
-  // }
-
-  // Saving artist banner
-  function artistBanner(artistName) {
-    $.ajax({
-      url: url2 + artistName,
-      method: "GET",
-    }).then(function (image) {
-      console.log(image.artists[0]);
-      localStorage.setItem(
-        "artistName",
-        JSON.stringify(image.artists[0].strArtist)
-      );
-      localStorage.setItem(
-        "artistBanner",
-        JSON.stringify(image.artists[0].strArtistThumb)
-      );
-      localStorage.setItem(
-        "artistInfo",
-        JSON.stringify(image.artists[0].strBiographyEN)
       );
       tasteTube(artistName);
     });
@@ -124,7 +110,7 @@ $(document).ready(function () {
       crossDomain: true,
       dataType: "jsonp",
     }).then(function (videoID) {
-      console.log(videoID.Similar.Info[0]);
+      // console.log(videoID.Similar.Info[0]);
       localStorage.setItem(
         "youTube",
         JSON.stringify(videoID.Similar.Info[0].yID)
