@@ -5,17 +5,7 @@ $(document).ready(function () {
 
   // API URL Variables
   var audioDB = "https://www.theaudiodb.com/api/v1/json/1/search.php?s=";
-  // var lastFMURL = "https://ws.audioscrobbler.com/2.0/?method=";
-
-  // var getSimilarArtists = "artist.getsimilar&artist=";
-
-  // var getTopArtists = "chart.getTopArtists";
-
-  // var getArtistInfo = "artist.getinfo&artist=";
-
-  // var apiKey = "&api_key=6c1bc3108e57d5a4c6eca326981bfaa6&limit=8&format=json";
-
-  // var url = lastFMURL + getTopArtists + apiKey;
+  var tasteDive = "https://tastedive.com/api/similar?limit=20&q=";
 
   // Array to push json data into
   var similarArtists = [];
@@ -24,13 +14,13 @@ $(document).ready(function () {
   searchBtn.click(function (event) {
     event.preventDefault();
     var q = searchInput.val().trim();
-    // artistInfo(q);
-    getSim(q);
+    artistBanner(q);
   });
 
   // Retrieves json data
   if (localStorage.getItem("artistName") === null) {
-    console.log("Local storage is null");
+    console.log("Artist not found")
+    
   } else var retName = JSON.parse(localStorage.getItem("artistName"));
   var retInfo = JSON.parse(localStorage.getItem("artistInfo"));
   var retArtists = JSON.parse(localStorage.getItem("similarArtists"));
@@ -39,12 +29,16 @@ $(document).ready(function () {
 
   // Sets elements on page
   $("#artist-name").text(retName);
+  if (retInfo == ""){
+    $("#bio").css("display", "none")
+  } else {
   $(".artist-bio").text(retInfo);
+  }
    $("#searched-artist").css("background-image", "url(" + retBanner + ")");
   $("iframe").attr("src", "https://www.youtube.com/embed/" + retVideo);
 
   if (retArtists.length === 0) {
-    $("#h3").css("display", "none")
+    $("#grid").css("display", "none")
   } else {
   for (var i = 0; i < retArtists.length; i++) {
     similarArtists.push(retArtists[i].Name);
@@ -53,7 +47,7 @@ $(document).ready(function () {
 }
 
   var similarartistcount = [];
-  console.log(similarartistcount);
+  // console.log(similarartistcount);
 
   // Ajax called to get artist Images
   function getImages(parameter) {
@@ -71,7 +65,6 @@ $(document).ready(function () {
 
         // create the html for similar artists
         var similarArtistsGrid = $(".similar-artists-grid");
-
         var similarArtistsCell = $("<div>").addClass(
           "cell large-3 medium-4 small-6"
         );
@@ -86,7 +79,6 @@ $(document).ready(function () {
         gridY.append(artistNameDiv);
         var h5 = $("<h5>");
         artistNameDiv.append(h5);
-
         // console.log(parameter, "---->", artistPic);
         $(artistLink).css(
           "background-image",
@@ -96,41 +88,12 @@ $(document).ready(function () {
         $(h5).text(parameter);
         $(".artist-info").on("click", function () {
           console.log($(this).attr("data-artist"));
-
           var imageClick = encodeURIComponent($(this).attr("data-artist"));
-          getSim(imageClick);
+          artistBanner(imageClick);
         });
       }
     });
   }
-
-  // Get Similar Artist
-  function getSim(artistName) {
-    $.ajax({
-      url: "https://tastedive.com/api/similar?limit=20&q=" + artistName,
-      method: "GET",
-      crossDomain: true,
-      dataType: "jsonp",
-    }).then(function (artists) {
-      console.log(artists.Similar.Results);
-      localStorage.setItem(
-        "similarArtists",
-        JSON.stringify(artists.Similar.Results)
-      );
-      artistBanner(artistName);
-    });
-  }
-
-  // Function to get artist info
-  // function artistInfo(parameter) {
-  //   $.ajax({
-  //     url: lastFMURL + getArtistInfo + parameter + apiKey,
-  //     method: "GET",
-  //   }).then(function (artists) {
-  //     console.log(artists);
-  //     localStorage.setItem("artistName", JSON.stringify(artists.artist.name));
-  //   });
-  // }
 
   // Saving artist banner
   function artistBanner(artistName) {
@@ -138,6 +101,9 @@ $(document).ready(function () {
       url: audioDB + artistName,
       method: "GET",
     }).then(function (image) {
+      if (image.artists === null){
+        location.href = "searched.html";
+      } else {
       console.log(image.artists[0]);
       localStorage.setItem(
         "artistName",
@@ -151,9 +117,28 @@ $(document).ready(function () {
         "artistInfo",
         JSON.stringify(image.artists[0].strBiographyEN)
       );
+      getSim(artistName);
+      }
+    });
+  }
+
+  // Get Similar Artist
+  function getSim(artistName) {
+    $.ajax({
+      url: tasteDive + artistName,
+      method: "GET",
+      crossDomain: true,
+      dataType: "jsonp",
+    }).then(function (artists) {
+      console.log(artists.Similar.Results);
+      localStorage.setItem(
+        "similarArtists",
+        JSON.stringify(artists.Similar.Results)
+      );
       tasteTube(artistName);
     });
   }
+
 
   // Tastedive to get YouTube video IDs
   function tasteTube(artistName) {
